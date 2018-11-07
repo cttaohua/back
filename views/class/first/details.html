@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>一级分类</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="ibox-title clearfix">
+                {% if first_msg.id %}
+                <h5>编辑一级分类</h5>
+                {% else %}
+                <h5>添加一级分类</h5>
+                {% endif %}
+                <div class="ibox-tools">
+                    <a id="page-goback" href="javascript:;">
+                        <i class="layui-icon layui-icon-return"></i>
+                        返回
+                    </a>
+                    <a id="page-refresh" href="javascript:;">
+                        <i class="layui-icon layui-icon-refresh"></i>
+                        刷新
+                    </a>
+                </div>
+            </div>
+            <div class="layui-col-md6 pb_20 pt_30">
+                <form class="layui-form" action="/class/first/handle" autocomplete="off" method="post">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">分类名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="value" required lay-verify="required" placeholder="请输入分类名" class="layui-input" value="{{first_msg.value}}">
+                        </div>
+                    </div>
+                    <input type="hidden" name="id" value="{{first_msg.id}}">
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="common_form">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/content.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        layui.use('form', function() {
+            var form = layui.form;
+            form.render('select');
+            //   //监听提交
+            form.on('submit(common_form)', function(data) {
+                
+            });
+        });
+    })
+    </script>
+</body>
+
+</html>

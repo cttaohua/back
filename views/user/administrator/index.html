@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>桃花源 后台管理员</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css">
+</head>
+
+<body>
+    <div class="layui-fluid" id="administrator">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-sm2">
+                        <div class="layui-input-block ml_0">
+                            <input type="text" name="loginname" placeholder="登录名" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-sm2">
+                        <div class="layui-input-block ml_0">
+                            <input type="text" name="telphone" placeholder="手机号" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-sm3">
+                        <button type="button" class="layui-btn fl">查询</button>
+                        <a href="" class="layui-btn layui-btn-warm fl">重置</a>
+                    </div>
+                    <div class="layui-inline layui-col-sm2 fr">
+                        <a href="/user/administrator/details" class="layui-btn fr">
+                           <i class="layui-icon layui-icon-add-1 static"></i>添加
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <colgroup>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                      <col>
+                      <col width="120">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>登录名</th>
+                            <th>手机</th>
+                            <th>邮箱</th>
+                            <th>角色</th>
+                            <th>加入时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in adminList">
+                            <td>${item.id}</td>
+                            <td>${item.nick}</td>
+                            <td>${item.mobile}</td>
+                            <td>${item.email}</td>
+                            <td>${item.role_name}</td>
+                            <td>${item.create_time | date}</td>
+                            <td>
+                                <div class="layui-table-cell laytable-cell-3-0-5"> <a :href="'/user/administrator/details?id='+item.id" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a> <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a> </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/vue.min.js"></script>
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript">
+    new Vue({
+        delimiters: ['${', '}'],
+        el: '#administrator',
+        data: {
+            adminList: []
+        },
+        filters: {
+            date: function(input) {
+                var d = new Date(Number(input));
+                var year = d.getFullYear();
+                var month = d.getMonth() + 1;
+                var day = d.getDate() < 10 ? '0' + d.getDate() : '' + d.getDate();
+                var hour = d.getHours();
+                var minutes = d.getMinutes();
+                var seconds = d.getSeconds();
+                return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
+            }
+        },
+        created: function() {
+            this.getList();
+        },
+        mounted: function() {
+
+        },
+        methods: {
+            getList: function() {
+                let _this = this;
+                $.ajax({
+                    url: '/api/adminList',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function(res) {
+                        if (res.code == 200) {
+                            _this.adminList = res.body;
+                        }
+                    }
+                })
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>
