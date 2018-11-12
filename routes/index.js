@@ -6,8 +6,8 @@ module.exports = function(app) {
 	//验证登录状态
 	app.use(function (req, res, next) {
 	    var user_msg;
-	    if (req.cookies.userInfo) {
-	        user_msg = JSON.parse(new Buffer(req.cookies.userInfo, 'base64').toString());
+	    if (req.cookies.user_msg) {
+	        user_msg = JSON.parse(new Buffer(req.cookies.user_msg, 'base64').toString());
 	        req.userInfo = user_msg;
 	        next();
 	    }else {

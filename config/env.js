@@ -9,6 +9,9 @@ var mysqlConfig = {
 	password: '123456',
 	database: 'taohua'
 }
+const setDefaults = {
+	cache: true
+}
 
 //测试
 // var mysqlConfig = {
@@ -17,8 +20,12 @@ var mysqlConfig = {
 // 	password: 'Lh456123',
 // 	database: 'taohua'
 // }
+// const setDefaults = {
+// 	cache: false
+// }
 
 module.exports = {
 	data: data,
-	mysqlConfig: mysqlConfig
+	mysqlConfig: mysqlConfig,
+	setDefaults: setDefaults
 }

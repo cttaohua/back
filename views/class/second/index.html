@@ -49,6 +49,7 @@
                             <td>${item.parent_value}</td>
                             <td v-if="item.status==1" class="text-success">正常</td>
                             <td v-if="item.status==0" class="text-proceed">待审核</td>
+                            <td v-if="item.status==2" class="text-proceed">管理员专用</td>
                             <td>
                                 <div class="layui-table-cell laytable-cell-3-0-5"> <a :href="'/class/second/details?id='+item.id" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a></div>
                             </td>

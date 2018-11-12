@@ -56,6 +56,7 @@
                         <div class="layui-input-block">
                           <input type="radio" name="status" value="1" title="正常" {% if second_msg.status==1 %} checked {% endif %}>
                           <input type="radio" name="status" value="0" title="待审核" {% if second_msg.status==0 %} checked {% endif %}>
+                          <input type="radio" name="status" value="2" title="管理员专用" {% if second_msg.status==2 %} checked {% endif %}>
                         </div>
                     </div>
                     <input type="hidden" name="id" value="{{second_msg.id}}">
