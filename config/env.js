@@ -12,6 +12,7 @@ var mysqlConfig = {
 const setDefaults = {
 	cache: true
 }
+const hosts = 'http://taohuayuanskill.com:3000/';
 
 //测试
 // var mysqlConfig = {
@@ -23,9 +24,12 @@ const setDefaults = {
 // const setDefaults = {
 // 	cache: false
 // }
+// const hosts = 'http://localhost:3000/';
+
 
 module.exports = {
 	data: data,
 	mysqlConfig: mysqlConfig,
-	setDefaults: setDefaults
+	setDefaults: setDefaults,
+	hosts: hosts
 }

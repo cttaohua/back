@@ -12,3 +12,17 @@
 .text-warning {
     color: rgb(228, 74, 79)!important;
 }
+
+.hr-line-dashed {
+	margin: 20px 0;
+    height: 1px;
+    border-top: 1px dashed #e7eaec;
+    background-color: #fff;
+    color: #fff;
+}
+
+.layui-btn .layui-icon {
+	display: inline-block;
+	margin-top: -4px;
+	vertical-align: middle;
+}

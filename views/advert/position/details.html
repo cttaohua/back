@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>广告位</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css">
+</head>
+
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="ibox-title clearfix">
+                {% if p_msg.id %}
+                <h5>编辑广告位</h5>
+                {% else %}
+                <h5>添加广告位</h5>
+                {% endif %}
+                <div class="ibox-tools">
+                    <a id="page-goback" href="javascript:;">
+                        <i class="layui-icon layui-icon-return"></i>
+                        返回
+                    </a>
+                    <a id="page-refresh" href="javascript:;">
+                        <i class="layui-icon layui-icon-refresh"></i>
+                        刷新
+                    </a>
+                </div>
+            </div>
+            <div class="details-content">
+                <form class="layui-form clearfix" action="/advert/position/handle" autocomplete="off" method="post">
+                    <div class="layui-form-item layui-col-md6 fn">
+                        <label class="layui-form-label">广告位名称</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ad_name" required lay-verify="required" placeholder="" class="layui-input" value="{{p_msg.ad_name}}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
+                        <label class="layui-form-label">广告位简介</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ad_intro" placeholder="" class="layui-input" value="{{p_msg.ad_intro}}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
+                        <label class="layui-form-label">广告位描述</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ad_description" placeholder="" class="layui-input" value="{{p_msg.ad_description}}">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
+                        <label class="layui-form-label">启用</label>
+                        <div class="layui-input-block">
+                          <input type="radio" name="status" value="1" title="是" {% if p_msg.status==1 %} checked {% endif %}>
+                          <input type="radio" name="status" value="0" title="否" {% if p_msg.status==0 %} checked {% endif %}>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <input type="hidden" name="id" value="{{p_msg.id}}">
+                    <div class="layui-form-item layui-col-md6 fn">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit lay-filter="common_form">立即提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/content.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        layui.use('form', function() {
+            var form = layui.form;
+            form.render('select');
+            //   //监听提交
+            form.on('submit(common_form)', function(data) {
+                
+            });
+        });
+    })
+    </script>
+</body>
+
+</html>

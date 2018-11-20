@@ -86,6 +86,9 @@ router.post('/first/handle',function(req,res,next){
 	async.parallel([
 		function(callback) {
 			let insertObj = params;
+            if(insertObj.sort=='') {
+                insertObj.sort = 0;
+            }
 			if(insertObj.id!='') {  //编辑
                 let obj = {
                     id: insertObj.id

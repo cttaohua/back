@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>桃花源 广告位列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css">
+</head>
+
+<body>
+    <div class="layui-fluid" id="ad_position_list">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-sm2 fr">
+                        <a href="/advert/position/details" class="layui-btn fr">
+                           <i class="layui-icon layui-icon-add-1 static"></i>添加广告位
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>广告位名称</th>
+                            <th>广告位简介</th>
+                            <th>广告位描述</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in position_list">
+                            <td>${item.id}</td>
+                            <td>${item.ad_name}</td>
+                            <td>${item.ad_intro}</td>
+                            <td>${item.ad_description}</td>
+                            <td v-if="item.status==1" class="text-success">启用</td>
+                            <td v-if="item.status==0" class="text-warning">未启用</td>
+                            <td>
+                                <div class="layui-table-cell laytable-cell-3-0-5"> <a :href="'/advert/position/details?id='+item.id" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/vue.min.js"></script>
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            delimiters: ['${', '}'],
+            el: '#ad_position_list',
+            data: {
+                position_list: []
+            },
+            created: function() {
+                this.getlist();
+            },
+            mounted: function() {
+
+            },
+            methods: {
+                getlist: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: '/api/ad_position/list',
+                        type: 'get',
+                        success: function(res) {
+                           if(res.code==200) {
+                              _this.position_list = res.body;
+                           }
+                        }
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
