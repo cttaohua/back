@@ -64,7 +64,9 @@ router.get('/second/details',function(req,res,next){
                     }
                 })
             }else {  //添加
-                callback(null, {});
+                callback(null, {
+                    status: 1
+                });
             }
         }
     ],function(err,result){
@@ -140,6 +142,13 @@ router.post('/second/handle',function(req,res,next){
     async.parallel([
         function(callback) {
             let insertObj = params;
+            if(insertObj.cover=='') {
+                delete insertObj['cover'];
+            }else {
+                insertObj.cover = fun.base64(params.cover,'class',params.originalImg);
+            }
+            delete insertObj.fileElem;
+            delete insertObj.originalImg;
             if(insertObj.id!='') {  //编辑
                 let obj = {
                     id: insertObj.id
@@ -155,9 +164,9 @@ router.post('/second/handle',function(req,res,next){
             }else {  //新增
                 delete insertObj['id'];
                 let nowDate = Date.parse(new Date());
-                insertObj.status = 1;
                 insertObj.create_time = nowDate;
                 insertObj.article_num = 0;
+                insertObj.creator_id = '10000';  //创建人小桃花
                 db.insert('th_classify',insertObj,function(err,vals){
                     if(err) {
                         callback('err',err);

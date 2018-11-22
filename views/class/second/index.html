@@ -31,12 +31,14 @@
                         <col>
                         <col>
                         <col>
+                        <col>
                         <col width="120px">
                     </colgroup>
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>分类名</th>
+                            <th>分类图</th>
                             <th>父级分类</th>
                             <th>状态</th>
                             <th>操作</th>
@@ -46,6 +48,9 @@
                         <tr v-for="item in secondList">
                             <td>${item.id}</td>
                             <td>${item.value}</td>
+                            <td>
+                                <img :src="item.cover">
+                            </td>
                             <td>${item.parent_value}</td>
                             <td v-if="item.status==1" class="text-success">正常</td>
                             <td v-if="item.status==0" class="text-proceed">待审核</td>
