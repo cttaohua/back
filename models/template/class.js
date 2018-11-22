@@ -4,6 +4,7 @@ var async = require('async');
 var db = require('../../db/package.js');
 var query = require('../../config/node-mysql.js');
 const commonuse = require('../../db/commonuse.js');
+const fun = require('../../library/fun.js');
 
 
 /* GET 一级分类列表页 page */
@@ -87,8 +88,15 @@ router.post('/first/handle',function(req,res,next){
 		function(callback) {
 			let insertObj = params;
             if(insertObj.sort=='') {
-                insertObj.sort = 0;
+                delete insertObj['sort'];
             }
+            if(insertObj.cover=='') {
+                delete insertObj['cover'];
+            }else {
+                insertObj.cover = fun.base64(params.cover,'class',params.originalImg);
+            }
+            delete insertObj.fileElem;
+            delete insertObj.originalImg;
 			if(insertObj.id!='') {  //编辑
                 let obj = {
                     id: insertObj.id

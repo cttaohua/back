@@ -32,33 +32,37 @@
                     </a>
                 </div>
             </div>
-            <div class="layui-col-md6 pb_20 pt_30">
+            <div class="details-content">
                 <form class="layui-form" action="/user/handleAdmin" autocomplete="off" method="post">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">登录名</label>
                         <div class="layui-input-block">
                             <input type="text" name="nick" required lay-verify="required" placeholder="请输入登录名" class="layui-input" value="{{user_msg.nick}}">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-block">
                             <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" class="layui-input" value="{{user_msg.password}}">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">手机</label>
                         <div class="layui-input-block">
                             <input type="text" name="mobile" required lay-verify="required|phone" placeholder="请输入手机号" class="layui-input" value="{{user_msg.mobile}}">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">邮箱</label>
                         <div class="layui-input-block">
                             <input type="text" name="email" required lay-verify="required|email" placeholder="请输入邮箱" class="layui-input" value="{{user_msg.email}}">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">角色</label>
                         <div class="layui-input-block">
                             <select name="role_id" lay-verify="required">
@@ -69,8 +73,9 @@
                             </select>
                         </div>
                     </div>
+                    <div class="hr-line-dashed"></div>
                     <input type="hidden" name="id" value="{{user_msg.id}}">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-col-md6 fn">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="user_admin_form">立即提交</button>
                         </div>
@@ -82,18 +87,6 @@
     <script type="text/javascript" src="/plugins/jquery.min.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script type="text/javascript" src="/js/content.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        layui.use('form', function() {
-            var form = layui.form;
-            form.render('select');
-            //   //监听提交
-            form.on('submit(user_admin_form)', function(data) {
-                
-            });
-        });
-    })
-    </script>
 </body>
 
 </html>

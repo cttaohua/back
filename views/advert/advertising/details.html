@@ -44,17 +44,18 @@
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <div class="layui-form-item layui-col-md6 fn">
+                    <div class="layui-form-item layui-col-md12 fn">
                         <label class="layui-form-label">上传广告图</label>
                         <div class="layui-input-block uploadImg">
+                            <div class="text-warning">尺寸 640 X 270</div>
                             <button type="button" class="layui-btn fileSelect fl">上传广告图</button>
                             <input type="file" name="fileElem" class="upload_file hide">
-                            <img src="{{msg.ad_img}}" class="exhibition layui-col-md8">
+                            <img src="{{msg.ad_img}}" class="exhibition">
                             <input type="hidden" name="ad_img" value="{{msg.ad_img}}" class="img_value" required lay-verify="required">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
-                    <div class="layui-form-item layui-col-md6 fn">
+                    <div class="layui-form-item layui-col-md12 fn">
                         <label class="layui-form-label">排序</label>
                         <div class="layui-input-inline">
                             <input type="text" name="sort" placeholder="" class="layui-input" value="{{msg.sort}}">
@@ -104,18 +105,6 @@
     <script type="text/javascript" src="/plugins/jquery.min.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script type="text/javascript" src="/js/content.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        layui.use('form', function() {
-            var form = layui.form;
-            form.render('select');
-            //   //监听提交
-            form.on('submit(common_form)', function(data) {
-                
-            });
-        });
-    })
-    </script>
 </body>
 
 </html>

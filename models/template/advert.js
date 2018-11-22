@@ -136,9 +136,11 @@ router.post('/advertising/handle',function(req,res,next){
            if(params.ad_link) {
              insertObj.ad_link = params.ad_link;
            }
-           insertObj.ad_img = fun.base64(params.ad_img,'ad',params.originalImg);
+           if(insertObj.ad_img) {
+             insertObj.ad_img = fun.base64(params.ad_img,'ad',params.originalImg);
+           }
            if(params.sort) {
-            insertObj.sort = params.sort;
+             insertObj.sort = params.sort;
            }
            insertObj.position_id = params.position_id;
            insertObj.blank = params.blank;

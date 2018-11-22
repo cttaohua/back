@@ -1,5 +1,15 @@
 $(function(){
 	var contentObj = {
+		init: function() {
+            layui.use('form', function() {
+	            var form = layui.form;
+	            form.render('select');
+	            //监听提交
+	            form.on('submit(common_form)', function(data) {
+	                
+	            });
+	        });
+		},
 		goBack: function() {
 			$('#page-goback').on('click',function(){
 				window.history.go(-1);

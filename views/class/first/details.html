@@ -32,23 +32,37 @@
                     </a>
                 </div>
             </div>
-            <div class="layui-col-md6 pb_20 pt_30">
+            <div class="details-content">
                 <form class="layui-form" action="/class/first/handle" autocomplete="off" method="post">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-col-md6 fn">
                         <label class="layui-form-label">分类名</label>
                         <div class="layui-input-block">
                             <input type="text" name="value" required lay-verify="required" placeholder="请输入分类名" class="layui-input" value="{{first_msg.value}}">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md12 fn">
+                        <label class="layui-form-label">上传分类图</label>
+                        <div class="layui-input-block uploadImg">
+                            <div class="text-warning">尺寸 200 X 200</div>
+                            <button type="button" class="layui-btn fileSelect fl">上传分类图</button>
+                            <input type="file" name="fileElem" class="upload_file hide">
+                            <img src="{{first_msg.cover}}" class="exhibition">
+                            <input type="hidden" name="cover" value="" class="img_value">
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="layui-form-item layui-col-md12 fn">
                         <label class="layui-form-label">排序</label>
                         <div class="layui-input-inline">
                             <input type="number" name="sort" placeholder="" class="layui-input" value="{{first_msg.sort}}">
                         </div>
                         <div class="layui-form-mid layui-word-aux text-warning"><i class="layui-icon layui-icon-notice"></i>排序数值越大排序越靠后</div>
                     </div>
+                    <div class="hr-line-dashed"></div>
+                    <input type="hidden" name="originalImg" value="{{first_msg.cover}}">
                     <input type="hidden" name="id" value="{{first_msg.id}}">
-                    <div class="layui-form-item">
+                    <div class="layui-form-item layui-col-md6 fn">
                         <div class="layui-input-block">
                             <button class="layui-btn" lay-submit lay-filter="common_form">立即提交</button>
                         </div>
@@ -60,18 +74,6 @@
     <script type="text/javascript" src="/plugins/jquery.min.js"></script>
     <script src="/layuiadmin/layui/layui.js"></script>
     <script type="text/javascript" src="/js/content.min.js"></script>
-    <script type="text/javascript">
-    $(function() {
-        layui.use('form', function() {
-            var form = layui.form;
-            form.render('select');
-            //   //监听提交
-            form.on('submit(common_form)', function(data) {
-                
-            });
-        });
-    })
-    </script>
 </body>
 
 </html>
