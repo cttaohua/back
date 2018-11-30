@@ -5,7 +5,7 @@ var compression = require('compression');
 // var logger = require('morgan');
 var swig = require('swig');
 var bodyParser = require('body-parser');
-const env = require('./config/env.js');
+const env = require('./bin/config.js');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api');

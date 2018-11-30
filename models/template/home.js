@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var async = require('async');
+const fun = require('../../library/fun.js');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -12,9 +13,11 @@ router.get('/', function (req, res, next) {
 
 /* GET console page. */
 router.get('/console', function (req, res, next) {
-    
+	let memory,cpu;
+    [memory,cpu] = fun.getCpurate();
     res.render('home/console.html', {
-		
+		memory: memory,
+		cpu: cpu
     });
 });
 
