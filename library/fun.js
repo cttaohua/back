@@ -20,8 +20,9 @@ function base64(str,path,origin) {
 function getCpurate() {
 	let total = os.totalmem()/1024/1024; //系统总内存 M
 	let free = os.freemem()/1024/1024;  //空闲内存 M
+	let occupy = total - free;
 	let fifteen = os.loadavg()[2];  //cpu 使用率
-    let memory = Number(Number(free/total).toFixed(4)*100).toFixed(2);
+    let memory = Number(Number(occupy/total).toFixed(4)*100).toFixed(2);
     let cpu = Number(Number(fifteen/1).toFixed(4)*100).toFixed(2);
     return [memory,cpu];
 }
