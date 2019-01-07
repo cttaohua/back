@@ -3,6 +3,7 @@ module.exports = function(app) {
 	var user = require('../models/template/user.js');
 	var classify = require('../models/template/class.js');
 	var advert = require('../models/template/advert.js');
+	var article = require('../models/template/article.js');
 	var test = require('../models/template/test.js');
 	//验证登录状态
 	app.use(function (req, res, next) {
@@ -19,5 +20,6 @@ module.exports = function(app) {
 	app.use('/user',user);
 	app.use('/class',classify);
 	app.use('/advert',advert);
+	app.use('/article',article);
 	app.use('/test',test);
 }

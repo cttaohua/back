@@ -26,7 +26,15 @@ function getCpurate() {
     let cpu = Number(Number(fifteen/1).toFixed(4)*100).toFixed(2);
     return [memory,cpu];
 }
+//async await 中间函数
+function to(promise) {
+	return promise.then(data => {
+	   return [null, data];
+	})
+	.catch(err => [err]);
+ }
 module.exports = {
 	base64,
-	getCpurate
+	getCpurate,
+	to
 }

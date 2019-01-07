@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>桃花源 文章列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/css/style.min.css">
+</head>
+
+<body>
+    <div class="layui-fluid" id="article_index">
+        <div class="layui-card">
+            <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                <div class="layui-form-item layui-row">
+                    
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <colgroup>
+                        <col>
+                        <col width="120px">
+                        <col>
+                        <col width="120px">
+                        <col width="120px">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>文章名</th>
+                            <th>简介</th>
+                            <th class="text-center">状态</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in a_list">
+                            <td>${item.id}</td>
+                            <td>${item.title}</td>
+                            <td>
+                                ${item.abstract}
+                            </td>
+                            <td class="text-center">
+                                <span v-if="item.status==0" class="text-proceed">待审核</span>
+                                <span v-if="item.status==1" class="text-success">正常</span>
+                            </td>
+                            <td>
+                                <div class="layui-table-cell laytable-cell-3-0-5"> <a :href="'/class/first/details?id='+item.id" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div id="paging" class="text-center"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/plugins/vue.min.js"></script>
+    <script type="text/javascript" src="/plugins/jquery.min.js"></script>
+    <script src="/layuiadmin/layui/layui.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            delimiters: ['${', '}'],
+            el: '#article_index',
+            data: {
+                a_list: [],
+                page: 1,
+                limit: 10,
+                flag: true
+            },
+            created: function() {
+                this.getList();
+            },
+            mounted: function() {
+
+            },
+            methods: {
+                getList: function() {
+                    var _this = this;
+                    $.ajax({
+                        url: '/api/article/list',
+                        type: 'get',
+                        data: {
+                            page: this.page,
+                            limit: this.limit
+                        },
+                        success: function(res) {
+                           if(res.code==200) {
+                               _this.a_list = res.body.list;
+                               if(_this.flag) {
+                                _this.flag = false;
+                                _this.pagingInit(res.body.count);
+                               }
+                           }
+                        }
+                    })
+                },
+                pagingInit: function(count) {
+                    var _this = this;
+                    layui.use('laypage', function(){
+                        var laypage = layui.laypage;
+                        laypage.render({
+                            elem: 'paging',
+                            count: count,
+                            limit: 10,
+                            layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                            jump: function(obj,first) {
+                                //首次不执行
+                                if(!first) {
+                                    _this.page = obj.curr;
+                                    _this.limit = obj.limit;
+                                    _this.getList();
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

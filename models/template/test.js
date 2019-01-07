@@ -7,7 +7,7 @@ const execTrans = require('../../db/execTrans.js');
 
 
 /* GET 测试 page */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
     
     function to(promise) {
        return promise.then(data => {
@@ -41,18 +41,16 @@ router.get('/', function(req, res, next) {
         })
     }
      
-    async function test() {
-        let err,v1,err2,v2;
-        [err,v] = await to(findClass());
-        if(err) {
-            console.log(err);
-        }else {
-            console.log(v);
-        }
-        [err2,v2] = await to(findFirst(v[0].parent_id));
-        console.log(v2);
+    let err,v1,err2,v2;
+    [err,v] = await to(findClass());
+    if(err) {
+        console.log(err);
+    }else {
+        console.log(v);
     }
-    test();
+    [err2,v2] = await to(findFirst(v[0].parent_id));
+    console.log(v2);
+    
     console.log('执行开始了-----------------');
 
     res.render('test/sql.html', {

@@ -123,6 +123,17 @@
                 </dd>
               </dl>
             </li>
+            <li data-name="article" class="layui-nav-item">
+                <a href="javascript:;" lay-tips="文章" lay-direction="2">
+                  <i class="layui-icon layui-icon-rate"></i>
+                  <cite>文章</cite>
+                </a>
+                <dl class="layui-nav-child">
+                  <dd data-name="article_manage">
+                    <a lay-href="/article/index">文章管理</a>
+                  </dd>
+                </dl>
+              </li>
             <li data-name="component" class="layui-nav-item" style="display: none">
               <a href="javascript:;" lay-tips="组件" lay-direction="2">
                 <i class="layui-icon layui-icon-component"></i>
@@ -324,7 +335,7 @@
                 </dd>
               </dl>
             </li>
-            <li data-name="template" class="layui-nav-item">
+            <li data-name="template" class="layui-nav-item" style="display:none;">
               <a href="javascript:;" lay-tips="页面" lay-direction="2">
                 <i class="layui-icon layui-icon-template"></i>
                 <cite>页面</cite>
