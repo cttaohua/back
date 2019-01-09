@@ -8,24 +8,24 @@ const fun = require('../../library/fun.js');
 const data = require('../../config/env.js').data;
 
 /* 文章列表 */
-router.get('/article/list', async function(req,res,next){
+router.get('/article/list', async function (req, res, next) {
 
     var params = req.query;
     var limit = Number(params.limit);
-    if(params.page==1) {
+    if (params.page == 1) {
         var page = 0;
-    }else {
-        var page = limit * (params.page-1);
+    } else {
+        var page = limit * (params.page - 1);
     }
-    
+
 
     function selectList() {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             var sql = "select * from th_article order by create_time DESC limit ?,?";
-            query(sql,[page,limit],function(err,vals,fields){
-                if(err) {
+            query(sql, [page, limit], function (err, vals, fields) {
+                if (err) {
                     reject(err);
-                }else {
+                } else {
                     resolve(vals);
                 }
             })
@@ -33,33 +33,36 @@ router.get('/article/list', async function(req,res,next){
     }
 
     function selectCount() {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             var sql = "select count(*) as count from th_article";
-            query(sql,'',function(err,vals,fields){
-                if(err) {
+            query(sql, '', function (err, vals, fields) {
+                if (err) {
                     reject(err);
-                }else {
+                } else {
                     resolve(vals[0].count);
                 }
             })
         })
     }
 
-    let list_err,vals,count_err,count;
+    let list_err, vals, count_err, count;
     let awaitList = selectList();
     let awaitCount = selectCount();
-    [list_err,vals] = await fun.to(awaitList);
-    [count_err,count] = await fun.to(awaitCount);
-    if(list_err) {
-        data['code'] = '400';
-        data['body'] = err;
-    }else {
+    [list_err, vals] = await fun.to(awaitList);
+    [count_err, count] = await fun.to(awaitCount);
+    try {
+        if (list_err) throw list_err;
+        if (count_err) throw count_err;
         data['code'] = '200';
         data['body'] = {
             list: vals,
             count: count
         };
+    } catch (e) {
+        data['code'] = '400';
+        data['body'] = e;
     }
+
     res.json(data);
 
 })

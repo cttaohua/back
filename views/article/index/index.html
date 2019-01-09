@@ -26,7 +26,10 @@
                         <col>
                         <col width="120px">
                         <col>
-                        <col width="120px">
+                        <col width="70px">
+                        <col width="70px">
+                        <col width="70px">
+                        <col width="80px">
                         <col width="120px">
                     </colgroup>
                     <thead>
@@ -34,6 +37,9 @@
                             <th>ID</th>
                             <th>文章名</th>
                             <th>简介</th>
+                            <th>浏览</th>
+                            <th>评论</th>
+                            <th>喜欢</th>
                             <th class="text-center">状态</th>
                             <th class="text-center">操作</th>
                         </tr>
@@ -45,6 +51,9 @@
                             <td>
                                 ${item.abstract}
                             </td>
+                            <td>${item.point_count}</td>
+                            <td>${item.comment_count}</td>
+                            <td>${item.attention_count}</td>
                             <td class="text-center">
                                 <span v-if="item.status==0" class="text-proceed">待审核</span>
                                 <span v-if="item.status==1" class="text-success">正常</span>
